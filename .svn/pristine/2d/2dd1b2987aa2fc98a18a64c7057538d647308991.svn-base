@@ -1,0 +1,65 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	pageContext.setAttribute("APP_PATH", request.getContextPath());
+%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>用户注册页面</title>
+	<link rel="icon" href="${APP_PATH}/static/img/stop.ico" type="image/x-icon">
+	<link rel="stylesheet" type="text/css" href="${APP_PATH}/static/css/style1.css"/>
+</head>
+<body>
+	<div class="main">	
+		<div class="w3layouts_main agileinfo w3"">
+			<div class="w3_agile_signup_form agileits">
+				<h1 class="w3_agileits w3ls" style="font-size: 27px;">注册</h1>
+				<!--<h2 class="wthree">Sign up to create new account</h2>-->
+				<div class="agile_login_form">
+					<form action="" method="post" class="agileits_w3layouts_form">
+						<input type="text" name="account" id="account" placeholder="用户名称" required="">
+						<input type="password" name="password" id="password" placeholder="密码" required="">
+						<input type="text" name="telephone" id="telephone" placeholder="电话号码" required="">
+						<input type="text" name="licenseNumber" id="licenseNumber" placeholder="车牌号码" required="">
+						<input type="button" id="registerBtn" value="注册">
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="agileits_copyright w3l">
+			<p>© 2018 什么冬梅停车系统</p>
+		</div>
+	</div>
+	<script src="${APP_PATH}/static/js/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$("#registerBtn").on("click",function(){
+				var account = $("#account").val();
+				var password = $("#password").val();
+				var telephone = $("#telephone").val();
+				var licenseNumber = $("#licenseNumber").val();
+				$.ajax({
+					url:"userRegiste",
+					type:"post",
+					data:{"account":account,"password":password,"telephone":telephone,"licenseNumber":licenseNumber},
+					success:function(data){
+						console.log(data);
+						if(data.code == 7){
+							alert(data.msg);
+							window.location.href = "toUserLogin";
+						}
+						else{
+							alert(data.msg);
+						}
+					},
+					error:function(){
+						alert("验证失败！");
+					}
+				});
+			});
+		});
+	</script>
+</body>
+</html>

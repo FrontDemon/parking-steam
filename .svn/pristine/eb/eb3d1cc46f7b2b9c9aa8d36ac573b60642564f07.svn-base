@@ -1,0 +1,62 @@
+package com.smdm.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.smdm.bean.Lot;
+import com.smdm.bean.LotExample;
+import com.smdm.bean.LotExample.Criteria;
+import com.smdm.dao.LotMapper;
+
+@Service
+public class LotService {
+	@Autowired
+	LotMapper lotMapper;
+	
+	/*
+	 * 根据id查询该车位的详情信息
+	 */
+	public List<Lot> getLotById(int lotId){
+		LotExample example = new LotExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andIdEqualTo(lotId);
+		List<Lot> list = lotMapper.selectByExample(example);
+		return list;	
+	}
+	
+	/*
+	 * 根据selectId查询该车位的详情信息
+	 */
+	public List<Lot> getLotBySelectId(int selectId){
+		LotExample example = new LotExample();
+		Criteria criteria = example.createCriteria();
+		//如果选择id为0，则表示查看可预约的车位
+		if(selectId == 0) 
+			criteria.andStatusEqualTo(0);
+		//如果选择id为1，则表示查看不可预约的车位
+		else if(selectId == 1) 
+			criteria.andStatusEqualTo(1);
+		else
+			return lotMapper.selectByExample(null);
+		List<Lot> list = lotMapper.selectByExample(example);
+		return list;	
+	}
+	
+	/*
+	 * @author Zm
+	 * 获取所有车位详情信息
+	 */
+	public List<Lot> getAllLot(){
+		return lotMapper.selectByExample(null);
+	}
+	
+	/**
+	 * 更新停车信息
+	 * @param lot
+	 */
+	public void updateLot(Lot lot) {
+		lotMapper.updateByPrimaryKey(lot);
+	}
+}

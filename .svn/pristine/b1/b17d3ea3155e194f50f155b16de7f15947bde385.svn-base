@@ -1,0 +1,106 @@
+.bread {
+	height: 40px;
+	line-height: 40px;
+	border-bottom: 1px solid #e5e6e6;
+	margin: 20px 0 30px 0;
+	padding: 0 10px;
+}
+
+.content {
+	width: 80%;
+	margin: 10px auto;
+	clear: both;
+}
+
+.replenish {
+	width: 70%;
+}
+
+.find_card {
+	background: #fff4ee none repeat scroll 0 0;
+	border: 1px solid #6FADAB;
+	border-radius: 15px;
+	color: #ff7f03;
+	font-family: 微软雅黑;
+	font-size: 18px;
+	height: 40px;
+	line-height: 40px;
+	padding: 0 10px;
+	text-align: center;
+	width: 80px;
+}
+
+.find_card a {
+	color: #6FADAB;
+}
+
+.header_center div {
+	display: inline-block;
+}
+
+.navigation {
+	font-size: 12px;
+	padding-left: 50px;
+}
+
+.navigation a:hover {
+	color: #46b448;
+}
+
+.nav_left {
+	margin-left: 20px;
+	float: left;
+}
+
+.order_mess {
+	float: left;
+	width: 76.5%;
+	margin-left: 10px;
+	;
+}
+
+.mess_top {
+	font-size: 16px;
+	font-weight: bold;
+	border: 1px solid #ddd;
+	height: 35px;
+	line-height: 35px;
+	padding-left: 15px;
+	background-color: #f7f7f7;
+	position: relative;
+}
+
+.mess_bottom {
+	margin-top: -10px;
+}
+
+.orderbottom {
+	margin-top: 20px;
+}
+
+
+/*iframe{border: none;}*/
+
+
+/*.top{
+				width:100%;
+				height:145px;
+			}*/
+
+.foot {
+	clear: both;
+	position: relative;
+	top: 20px;
+}
+
+.layui-nav-item {
+	background-color: #F7F7F7 !important;
+}
+
+.layui-nav-item a {
+	color: black !important;
+}
+
+.layui-nav-item a:hover {
+	background-color: #DEDEDE !important;
+}

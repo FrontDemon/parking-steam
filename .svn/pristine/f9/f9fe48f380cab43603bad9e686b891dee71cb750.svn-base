@@ -1,0 +1,73 @@
+package com.smdm.controller;
+
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.smdm.bean.Announcement;
+import com.smdm.bean.Lot;
+import com.smdm.service.AdminService;
+import com.smdm.service.AnnouncementService;
+import com.smdm.service.LotService;
+
+@Controller
+public class IndexController {
+	@Autowired
+	AnnouncementService announceService;
+	@Autowired
+	AdminService adminService;
+	@Autowired
+	LotService lotService;
+	
+	/*
+	 * 跳转到首页
+	 */
+	@RequestMapping(value="/userLoginToMain")
+	public ModelAndView toMain() {
+		ModelAndView mView = new ModelAndView();
+		List<Announcement> list = announceService.getAnnouncement();
+		mView.addObject("noticeList", list);
+		mView.setViewName("user/main");
+		return mView;
+	}
+	
+	/*
+	 * 跳转到公告详情页面
+	 */
+	@RequestMapping(value ="/toAnnouncement")
+	public ModelAndView toAnnouncenment(@RequestParam(value="titleId")int id) {
+		ModelAndView mView = new ModelAndView();
+		mView.setViewName("user/notice");
+		List<Announcement> list = announceService.getAnnounceById(id);
+		mView.addObject("notice", list.get(0));
+		
+		int adminId = list.get(0).getAdminId();//获取adminId得到管理员姓名
+		String adminName = adminService.getAdminName(adminId);
+		mView.addObject("adminName", adminName);
+		
+		Date now = new Date();
+		mView.addObject("now", now);
+		return mView;
+	}
+	
+	/*
+	 * @author Zm
+	 * 跳转到车位选择页面
+	 */
+	@RequestMapping(value ="/carSelect")
+	public ModelAndView toCarSelect() {
+		ModelAndView mView = new ModelAndView();
+		
+		List<Lot> lotList = lotService.getAllLot();
+		mView.addObject("lotList", lotList);
+		
+		mView.setViewName("user/carSelect");
+		return mView;
+	}
+	
+}
